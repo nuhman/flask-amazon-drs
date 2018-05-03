@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="amazon-root"></div>
+  <script type="text/javascript">
+    window.onAmazonLoginReady = function () {
+      amazon.Login.setClientId('amzn1.application-oa2-client.ee99d3f5a43849aa82edc88ad66f098a');
+    };
+    (function (d) {
+      var a = d.createElement('script');
+      a.type = 'text/javascript';
+      a.async = true;
+      a.id = 'amazon-login-sdk';
+      a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+      d.getElementById('amazon-root').appendChild(a);
+    })(document);
+  </script>
+
+  <a href="#" id="LoginWithAmazon">
+    <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32"
+      type="png" width="156" height="32" />
+  </a>
+
+
+  <script type="text/javascript">
+    document.getElementById('LoginWithAmazon').onclick = function () {
+      var deviceModel = 'smart-pantry';
+      var serialNo = '123456789';
+      var drsScope = 'dash:replenish';
+      var scopeData = new Object();
+      scopeData[drsScope] = {
+        device_model: deviceModel,
+        serial: serialNo,
+        should_include_non_live: true,
+        is_test_device: true
+      };
+      var options = {
+        scope: [drsScope, 'profile'],
+        scope_data: scopeData,
+        response_type: 'code'
+      };
+      amazon.Login.authorize(options, 'http://localhost:5000/auth/redirect');
+      return false;
+    };
+  </script>
+
+
+</body>
+
+</html>
