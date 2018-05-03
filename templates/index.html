@@ -33,7 +33,7 @@
   <script type="text/javascript">
     document.getElementById('LoginWithAmazon').onclick = function () {
       var deviceModel = 'smart-pantry';
-      var serialNo = '123456789';
+      var serialNo = new Date().getTime().toString();
       var drsScope = 'dash:replenish';
       var scopeData = new Object();
       scopeData[drsScope] = {
