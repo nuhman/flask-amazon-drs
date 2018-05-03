@@ -47,7 +47,11 @@
         scope_data: scopeData,
         response_type: 'code'
       };
-      amazon.Login.authorize(options, 'http://localhost:5000/auth/redirect');
+      if(window.location.hostname === 'localhost')
+        host_url = 'http://localhost:5000'
+      else
+        host_url = 'https://iot2100.herokuapp.com'
+      amazon.Login.authorize(options, `${host_url}/auth/redirect`);
       return false;
     };
   </script>
