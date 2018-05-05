@@ -10,7 +10,8 @@ from api import (generate_token,
           get_subscription_info,
           create_new_order,
           get_order_info,
-          delete_order
+          delete_order,
+          delete_order_all
           )
 from mongo import add_user
 
@@ -20,7 +21,7 @@ CORS(app)
 
 @app.route('/auth/login')
 def register_amazon():
-  return render_template('index.html')
+  return render_template('login.html')
 
 
 @app.route('/auth/redirect', methods=['GET'])
@@ -68,8 +69,21 @@ def order_status(id, instance_id):
 @app.route('/cancel-order/<int:id>/<string:slot_id>')
 def cancel_order(id, slot_id):
   result  = delete_order(id, slot_id)
+  return jsonify(result)
+
+@app.route('/cancel-order-all/<int:id>')
+def cancel_order_all(id):
+  result  = delete_order_all(id)
   return jsonify(result)  
 
+@app.route('/')
+def dashboard():
+  return render_template('dashboard.html', user_id = 1)
+
+
+@app.route('/<int:user_id>')
+def dashboard_generic(user_id):
+  return render_template('dashboard.html', user_id = user_id)
 
 
 if __name__ == "__main__":

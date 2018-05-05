@@ -119,6 +119,17 @@ def delete_order(id, slot_id):
       DRS_BASE_URI + '/testOrders/slots/{}'.format(slot_id), headers=headers)
   return json.loads(r.text)
 
+def delete_order_all(id):
+  access_token = get_access_token(id)
+  headers = {
+      'Authorization': 'Bearer {}'.format(access_token),
+      'x-amzn-accept-type': 'com.amazon.dash.replenishment.DrsCancelTestOrdersResult@1.0',
+      'x-amzn-type-version': 'com.amazon.dash.replenishment.DrsCancelTestOrdersInput@1.0'
+  }
+  r = requests.delete(
+      DRS_BASE_URI + '/testOrders', headers=headers)
+  return json.loads(r.text)
+
 
 def get_profile_info(access_token=None, id=None):
   if not access_token:

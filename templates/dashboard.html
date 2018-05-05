@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    user_id = {{user_id}};
+    const create_order = function (obj) {
+      fetch(`/replenish/${user_id}/${obj.id}`)
+        .then(
+          function (response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+              return;
+            }
+            response.json().then(function (data) {
+              let message = document.getElementById('message')
+              message.innerHTML = `
+              <p>${data['eventInstanceId']}</p>
+              <p>${data['detailCode']}</p>
+              `
+              console.log(data);
+            });
+          }
+        )
+        .catch(function (err) {
+          console.log('Fetch Error :-S', err);
+        });
+
+    }
+    
+    const cancel_order = function() {
+      fetch(`/cancel-order-all/${user_id}`)
+        .then(
+          function (response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+              return;
+            }
+            response.json().then(function (data) {
+              let message = document.getElementById('message')
+              message.innerHTML = ''
+              message.innerHTML += '<ul>'
+              l1 = 'slotOrderStatuses'
+              data[l1].forEach(element => {
+                message.innerHTML += `
+                   <li>
+                    <p>slot_id: ${element['slotId']}</p> 
+                    <p>subscribed: ${element['orderStatus']} <p>
+                   </li>
+                `
+              })
+              message.innerHTML += '</ul>'
+              console.log(data);
+            });
+          }
+        )
+        .catch(function (err) {
+          console.log('Fetch Error :-S', err);
+        });
+
+    }
+
+     const subscription_info = function () {
+      fetch(`/subscription/${user_id}`)
+        .then(
+          function (response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+              return;
+            }
+            response.json().then(function (data) {
+              let message = document.getElementById('message')
+              message.innerHTML = ''
+              message.innerHTML += '<ul>'
+              l1 = 'slotsSubscriptionStatus'
+              l3 = 'productInfoList'
+              Object.keys(data[l1]).forEach(element => {
+                message.innerHTML += `
+                   <li>
+                      <p>slot_id: ${element}</p> ` +
+                      // `<p>asin : ${data[l1][element][l3][0]['asin']}<p>
+                      // <p>quantity : ${data[l1][element][l3][0]['quantity']}<p>
+                      // <p>count : ${data[l1][element][l3][0]['count']}<p>` +
+                    `  <p>subscribed: ${data[l1][element]['subscribed']} <p>
+                   </li>
+                `
+              })
+              message.innerHTML += '</ul>'
+              console.log(data);
+            });
+          }
+        )
+        .catch(function (err) {
+          console.log('Fetch Error :-S', err);
+        });
+
+    }
+  </script>
+</head>
+
+<body>
+  <button onclick="create_order(this)" id="1438fb49-bdd1-4413-9c68-aaa82e84da53">Order Slot 1</button>
+  <br>
+  <button onclick="create_order(this)" id="490d109f-23a8-476a-8f8d-0814cc3799ef">Order Slot 2</button>
+  <br>
+  <button onclick="create_order(this)" id="4d776503-1889-4b92-bc6b-1029d97d3492">Order Slot 3</button>
+  <br>
+  <button onclick="cancel_order()">Cancel All Orders</button>
+  <br>
+  <button onclick="subscription_info()">Subscription Status</button>
+  <br>
+  <div id="message"></div>
+  <a href="/auth/login">Register new user</a>
+</body>
+
+</html>
