@@ -6,20 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <style>
-  
-  button{
-    padding: 0px 50px 0px 50px;
-    width: 100%;
-    height: 50px;;
-    margin-bottom: 10px;
-  }
 
-  a{
-    margin: 25px;
-  }
-  
+  <style>
+    button{
+      padding: 0px 50px 0px 50px;
+      width: 100%;
+      height: 75px;;
+      margin-bottom: 10px;
+    }
+
+    .link{
+      margin-top: 20px;
+      display: flex;
+      justify-content:space-evenly;
+    }
+
+    a{
+      text-decoration: none;
+    }
   </style>
+  
   <script>
     user_id = {{user_id}};
     const create_order = function (obj) {
@@ -131,7 +137,10 @@
   <button onclick="subscription_info()">Subscription Status</button>
   <br>
   <div id="message"></div>
-  <a href="/auth/login">Register new user</a>
+  <div class="link">
+    <a href="/auth/login">Register new user</a>
+  </div>
+    
 </body>
 
 </html>
