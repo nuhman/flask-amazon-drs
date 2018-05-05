@@ -6,6 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    .message {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,12 +35,16 @@
     })(document);
   </script>
   
+  <div class="message">
     <a href="#" id="LoginWithAmazon">
       <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32"
         type="png" width="156" height="32" />
     </a>
- 
+  </div>
+  
+  <div class="message">
     <a href="/">back</a>
+  </div>
 
   <script type="text/javascript">
     document.getElementById('LoginWithAmazon').onclick = function () {
@@ -48,7 +63,7 @@
         scope_data: scopeData,
         response_type: 'code'
       };
-      if(window.location.hostname === 'localhost')
+      if (window.location.hostname === 'localhost')
         host_url = 'http://localhost:5000'
       else
         host_url = 'https://iot2100.herokuapp.com'
