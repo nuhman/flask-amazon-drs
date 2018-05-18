@@ -2,7 +2,7 @@
   
 Read more about:  
 * [Amazon DRS](https://developer.amazon.com/dash-replenishment-service)  
-* [Flask](flask.pocoo.org/) - [tutorial](https://medium.com/python-pandemonium/build-simple-restful-api-with-python-and-flask-part-1-fae9ff66a706)
+* [Flask](https://flask.pocoo.org/) - [tutorial](https://medium.com/python-pandemonium/build-simple-restful-api-with-python-and-flask-part-1-fae9ff66a706)
 * [Python](https://www.learnpython.org/)  
   
 **Sample Services**:  
